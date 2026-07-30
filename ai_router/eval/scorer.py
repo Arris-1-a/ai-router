@@ -13,6 +13,7 @@ Provides multiple scoring metrics:
 from __future__ import annotations
 
 import math
+import statistics
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from enum import Enum
@@ -249,7 +250,7 @@ class ROUGEScorer:
             ScoreResult with ROUGE scores.
         """
         if isinstance(reference, str):
-            reference = reference
+            pass  # Single reference — use as-is
 
         cand_tokens = tokenize(candidate, lang)
         ref_tokens = tokenize(reference, lang)

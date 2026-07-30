@@ -90,6 +90,10 @@ class Episode:
     importance: float = 0.5
     tags: List[str] = field(default_factory=list)
 
+    def age_days(self) -> float:
+        """Age in days."""
+        return (time.time() - self.timestamp) / 86400.0
+
 
 # ──────────────────────────────────────────────────────────────────
 # Agent Memory

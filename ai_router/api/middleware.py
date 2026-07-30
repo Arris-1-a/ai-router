@@ -82,7 +82,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         super().__init__(app)
         self.log_body = log_body
         self.max_body_length = max_body_length
-        self.exclude_paths = exclude_paths or ["/health", "/metrics"]
+        self.exclude_paths = exclude_paths or ["/v1/health", "/v1/metrics"]
 
     async def dispatch(
         self,
@@ -180,7 +180,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self.rate = requests_per_minute / 60.0
         self.capacity = burst_size
         self.per_ip = per_ip
-        self.exclude_paths = exclude_paths or ["/health"]
+        self.exclude_paths = exclude_paths or ["/v1/health"]
         self._buckets: Dict[str, Dict[str, float]] = {}
 
     async def dispatch(

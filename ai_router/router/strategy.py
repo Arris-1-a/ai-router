@@ -850,7 +850,6 @@ class SemanticRouter(Strategy):
         # Check threshold
         if best_sim < self.similarity_threshold and no_embedding_targets:
             # Fall back to any target without embeddings
-            import random
             selected = random.choice(no_embedding_targets)
             reason = (
                 f"Low similarity ({best_sim:.3f}) — "

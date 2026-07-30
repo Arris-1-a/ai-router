@@ -559,10 +559,15 @@ class TokenBucketRateLimiter:
         start = time.monotonic()
         while True:
             all_ok = True
+            consumed: list = []
             for bucket, cost in relevant_buckets:
                 if not await bucket.consume(cost):
                     all_ok = False
+                    # Roll back consumed tokens from already-checked buckets
+                    for b2, c2 in consumed:
+                        b2.tokens = min(b2.capacity, b2.tokens + c2)
                     break
+                consumed.append((bucket, cost))
 
             if all_ok:
                 return True

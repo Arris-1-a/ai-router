@@ -384,10 +384,7 @@ class SemanticCache:
             ttl: TTL in seconds.
         """
         self.cache.set(key, value, ttl=ttl)
-        if query_text:
-            text = query_text
-        else:
-            text = key
+        text = query_text or key
         with self._lock:
             self._embedding_store[key] = self.embed_fn(text)
 

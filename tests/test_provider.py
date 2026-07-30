@@ -208,8 +208,7 @@ class TestGoogleProvider:
     def test_custom_headers(self):
         provider = GoogleProvider(api_key="test-key")
         headers = provider._default_headers()
-        assert "x-api-key" in headers
-        assert "anthropic-version" in headers
+        assert "Content-Type" in headers
 
 
 class TestProviderRegistry:

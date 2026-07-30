@@ -257,12 +257,9 @@ class TestStrategyFactory:
         assert strategy.tracker is tracker
 
     def test_unknown_strategy(self):
+        from ai_router.router.strategy import get_strategy_class
         with pytest.raises(ValueError):
-            create_strategy.__wrapped__ if hasattr(create_strategy, '__wrapped__') else None
-            # Test through registry
-            from ai_router.router.strategy import get_strategy_class
-            with pytest.raises(ValueError):
-                get_strategy_class("invalid")
+            get_strategy_class("invalid")  # type: ignore[arg-type]
 
 
 class TestRouteTarget:
